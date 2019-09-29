@@ -1,0 +1,1 @@
+<h1 align="center">Anda tidak diizinkan untuk mengakses halaman ini</h1>
