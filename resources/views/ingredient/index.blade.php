@@ -93,9 +93,9 @@
                             <td>{{++$key}}</td>
                             <td>{{$item->kategory_name}}</td>
                             <td>
-                                <button type="button" class="btn btn-warning btn-sm pull-left" data-toggle="modal" data-target="#editData{{$item->id}}"><i
+                                <button type="button" class="btn btn-warning btn-sm pull-left" data-toggle="modal" data-target="#editkategory{{$item->id}}"><i
                                         class="icon-pencil"></i> Edit</button>
-                                    <form action="{{route('ingredient.destroy',$item->id)}}" method="POST">
+                                    <form action="{{route('delete.kategory',$item->id)}}" method="POST">
                                         {{csrf_field()}} {{method_field('DELETE')}}
                                         <button type="button" onclick="if(confirm('Apakah anda yakin ingin menghapus data ini ?')){return this.form.submit()}else{return false}" class="btn btn-danger btn-sm"><i class="icon-trash"></i>
                                             Hapus</button>
@@ -309,7 +309,7 @@
 </div>
 @foreach ($kating as $item)
 <div class="container">
-    <div class="modal fade" id="editData{{$item->id}}" role="dialog">
+    <div class="modal fade" id="editkategory{{$item->id}}" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -317,19 +317,19 @@
                 </div>
 
                 <div class="modal-body">
-                    <form method="POST" action="{{route('add.kategory', $item->id)}}">
+                    <form method="POST" action="{{route('edit.kategory', $item->id)}}">
                         {{csrf_field()}}{{method_field('PUT')}}
 
                         <div class="form-group row">
-                            <label for="ingredient_nama" class="col-md-4 col-form-label">Ingredient</label>
+                            <label for="kategory_name" class="col-md-4 col-form-label">Ingredient</label>
 
                             <div class="col-md-12">
-                                <input id="ingredient_nama" type="text" class="form-control" name="ingredient_nama" value="{{$item->ingredient_nama}}"
+                                <input id="kategory_name" type="text" class="form-control" name="kategory_name" value="{{$item->ingredient_nama}}"
                                     required autofocus>
 
-                                @if ($errors->has('ingredient_nama'))
+                                @if ($errors->has('kategory_name'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('ingredient_nama') }}</strong>
+                                    <strong>{{ $errors->first('kategory_name') }}</strong>
                                 </span>
                                 @endif
                             </div>

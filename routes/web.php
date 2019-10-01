@@ -85,6 +85,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('transactions/{transaction}', ['as' => 'transactions.show', 'uses' => 'TransactionsController@show']);
     Route::post('add/ingredient', 'ProductsController@addSatuan')->name('add.ingredient');
     Route::post('add/kategory_ingredient', 'ProductsController@addKategory')->name('add.kategory');
+    Route::delete('deletekategory/{id}', 'ProductsController@deletekategory')->name('delete.kategory');
+    Route::put('editkategory/{id}', 'ProductsController@editkategory')->name('edit.kategory');
 
 });
     // Route::resource('users', 'UsersController', ['except' => ['create', 'show', 'edit']]);

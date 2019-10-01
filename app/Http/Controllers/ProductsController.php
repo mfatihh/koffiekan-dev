@@ -210,5 +210,23 @@ class ProductsController extends Controller
         return redirect()->back()->with('message', 'tambah data berhasil');
     }
 
+    public function deletekategory($id)
+    {
+        // dd('ok');
+        $product = KategoryIngredient::find($id);
+        // dd($product);
+        $product->delete();
+        return back()->with('message', 'Hapus data berhasil');
+    }
+
+    public function editkategory(Request $request, $id)
+    {
+        $product = KategoryIngredient::where('id', $id)->first();
+        $product->kategory_name = $request->kategory_name;
+        // dd($product);
+        $product->save();
+        return redirect()->back()->with('message', 'edit data berhasil');
+        
+    }
     
 }
