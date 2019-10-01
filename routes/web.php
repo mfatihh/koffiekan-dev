@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('add/kategory_ingredient', 'ProductsController@addKategory')->name('add.kategory');
     Route::delete('deletekategory/{id}', 'ProductsController@deletekategory')->name('delete.kategory');
     Route::put('editkategory/{id}', 'ProductsController@editkategory')->name('edit.kategory');
+    Route::delete('delete/transaction/{id}', 'TransactionsController@delete')->name('delete.transaction');
 
 });
     // Route::resource('users', 'UsersController', ['except' => ['create', 'show', 'edit']]);

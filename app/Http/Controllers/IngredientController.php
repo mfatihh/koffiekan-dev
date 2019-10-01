@@ -40,6 +40,7 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $data = $request->validate([
             'ingredient_nama' => 'required',
             'nilai' => 'required',
@@ -50,6 +51,7 @@ class IngredientController extends Controller
         $data = new Ingredient;
         $data->ingredient_nama = $request->ingredient_nama;
         $data->stok = $request->nilai;
+        $data->kategory_ingredient_id = $request->kategory_ingredient_id;
         $data->harga_satuan = $request->harga;
         $data->satuan_harga = $request->satuan_harga;
         $data->satuan = $request->satuan;
@@ -62,6 +64,7 @@ class IngredientController extends Controller
         $data2->store_id = 1;
         $data2->ingredient_nama = $request->ingredient_nama;
         $data2->stok = $request->nilai;
+        $data->kategory_ingredient_id = $request->kategory_ingredient_id;
         $data2->harga_satuan = $request->harga;
         $data2->satuan_harga = $request->satuan_harga;
         $data2->satuan = $request->satuan;

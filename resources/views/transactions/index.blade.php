@@ -16,17 +16,18 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="row">
                 <div class="col-md-12">
-                     {{--<a href="{{route('cart.index')}}" class="nav-link nav-toggle">
-                                <i class="icon-basket-loaded"></i>
-                                <span class="title">Transaksi Penjualan</span>
-                            </a>--}}
-                            <form action="{{ route('cart.add') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <Button type="submit" class="btn btn-info" name="create-cash-draft" id="cash-draft-create-button"
-                                        value="{{ trans('transaction.create_cash') }}">Buat Transaksi Penjualan</Button>
-                                    {{--<input type="submit" class="btn btn-default navbar-btn" name="create-credit-draft" id="credit-draft-create-button"
+                    {{--<a href="{{route('cart.index')}}" class="nav-link nav-toggle">
+                    <i class="icon-basket-loaded"></i>
+                    <span class="title">Transaksi Penjualan</span>
+                    </a>--}}
+                    <form action="{{ route('cart.add') }}" method="POST">
+                        {{ csrf_field() }}
+                        <Button type="submit" class="btn btn-info" name="create-cash-draft"
+                            id="cash-draft-create-button" value="{{ trans('transaction.create_cash') }}">Buat Transaksi
+                            Penjualan</Button>
+                        {{--<input type="submit" class="btn btn-default navbar-btn" name="create-credit-draft" id="credit-draft-create-button"
                                         value="{{ trans('transaction.create_credit') }}">--}}
-                                </form>
+                    </form>
                     <div class="card">
 
                         <div class="card-header card-header-primary">
@@ -52,13 +53,31 @@
                                             <td>{{ $transaction->invoice_no }}</td>
                                             <td>{{ $transaction->created_at->format('Y-m-d') }}</td>
                                             <td>{{ $transaction->items_count }}</td>
-                                            <td class="text-right">{{ formatRp($transaction->payment) }}</td>
+                                            <td>{{ formatRp($transaction->payment) }}</td>
 
-                                            <td class="text-center">
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm green dropdown-toggle" type="button"
+                                                        data-toggle="dropdown" aria-expanded="false"> Actions
 
-                                                {{ link_to_route('transactions.show', trans('app.show'), $transaction->invoice_no,
-                                ['class' => 'btn btn-default']) }}
+                                                    </button>
+                                                    <ul class="dropdown-menu pull-left" role="menu">
+                                                            <li style="padding:0 15px">
+                                                    {{ link_to_route('transactions.show', trans('app.show'), $transaction->invoice_no,
+                                                    ['class' => 'btn btn-warning btn-sm']) }}
+                                                        </li>
+                                                        <li style="padding:5px 0 5px 16px;">
+                                                    <form action="{{route('delete.transaction',$transaction->id)}}"
+                                                        method="POST">
+                                                        {{csrf_field()}} {{method_field('DELETE')}}
+                                                        <button type="button"
+                                                            onclick="if(confirm('Apakah anda yakin ingin menghapus data ini ?')){return this.form.submit()}else{return false}"
+                                                            class="btn btn-danger btn-sm"><i class="icon-trash"></i>
+                                                            Hapus</button>
+                                                    </form>
+                                                        </li>
                                             </td>
+
                                         </tr>
                                         @empty
                                         <tr>
@@ -197,18 +216,18 @@
                     })();
                 </script>
                 <script>
-                $(document).ready(function() {
-            $('#example').DataTable( {
-                "paging":   true,
-                "ordering": false,
-                "searching": true,
-                "info":     false,
-                "bPaginate": false,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bInfo": false,
-                "bAutoWidth": false 
-            } );
-        } );
+                    $(document).ready(function () {
+                        $('#example').DataTable({
+                            "paging": true,
+                            "ordering": false,
+                            "searching": true,
+                            "info": false,
+                            "bPaginate": false,
+                            "bLengthChange": false,
+                            "bFilter": true,
+                            "bInfo": false,
+                            "bAutoWidth": false
+                        });
+                    });
                 </script>
                 @endsection

@@ -220,7 +220,15 @@
             <div class="modal-body">
                 <form method="POST" action="{{route('ingredient.store')}}">
                     {{csrf_field()}}{{method_field('POST')}}
-
+                    
+                        
+                            <select class="form-control" name="kategory_ingredient_id" required>
+                                    <option value="">Pilih Kategori Ingredient</option>
+                                    @foreach($kating as $item)
+                                    <option value="{{$item->id}}">{{$item->kategory_name}}</option>
+                                    @endforeach
+                                </select>
+                    </div>
                     <div class="form-group row">
                         <label for="ingredient_nama" class="col-md-4 col-form-label">Ingredient</label>
 

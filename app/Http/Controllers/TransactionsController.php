@@ -42,4 +42,10 @@ class TransactionsController extends Controller
 
         return $pdf->setPaper('a5')->stream($transaction->invoice_no.'.faktur.pdf');
     }
+
+    public function delete($id)
+    {
+        $transaction = Transaction::find($id)->delete();
+        return back()->with('message', 'Hapus data berhasil');
+    }
 }

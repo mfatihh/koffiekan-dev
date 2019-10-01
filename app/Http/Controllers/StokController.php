@@ -34,11 +34,12 @@ class StokController extends Controller
         if($reqproduk != null){
             $stok = $this->getMonthlyReports($year, $month, $reqproduk);
             $stokSum = $this->getStokSum($year, $month, $reqproduk);
+            return view('stok/kartustok', compact('stok','stokSum', 'months', 'years', 'month', 'year'));
         }else{
             $stok = Stok::join('ingredient', 'ingredient.id', 'stoks.kode_produk')->orderBy('stoks.created_at', 'desc')->select('stoks.*', 'ingredient.ingredient_nama')->get();
+            return view('stok/kartustok', compact('stok', 'months', 'years', 'month', 'year'));
         }
 
-        return view('stok/kartustok', compact('stok', 'months', 'years', 'month', 'year'));
     }
 
     public function addStok(Request $request)
