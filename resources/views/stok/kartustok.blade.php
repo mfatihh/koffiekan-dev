@@ -13,7 +13,10 @@
                 <div class="tools"> </div>
                 
                 <button type="button" data-toggle="modal" data-target="#modTambah" class="btn btn-info btn-sm">
-                        Stok Masuk</button><br><br>
+                        Stok Masuk</button>
+                        <button type="button" data-toggle="modal" data-target="#modKurang" class="btn btn-danger btn-sm">
+                                Stok Keluar</button>
+                        <br><br>
                 {{ Form::open(['method' => 'get', 'class' => 'form-inline well well-sm']) }}
                 <select name="produk" class="form-control" style="width:150px;margin-right:20px;">
                     <option value="">Ingredient</option>
@@ -54,6 +57,7 @@
                             <th>Masuk</th>
                             <th>Keluar</th>
                             <th>Expenditure</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,6 +69,13 @@
                             <td>{{$item->masuk}}</td>
                             <td>{{$item->keluar}}</td>
                             <td>{{$item->harga}}</td>
+                            <td>@if($item->expired_at != null)
+                                @if($item->expired_at <= carbon::now()))
+                                Expired
+                                @endif
+                            @endif
+                        </td>
+                                
                         </tr>
                         @empty
                         <tr>
@@ -122,6 +133,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                            <label for="expired_at" class="col-md-4 col-form-label ">Expired Date</label>
+    
+                            <div class="col-md-12">
+                                <input id="expired_at" type="date" class="form-control" name="expired_at" autofocus>
+    
+                                @if ($errors->has('expired_at'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('expired_at') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>  
+
                     <div class="form-group row mb-0">
                         <div class="col-md-12">
                             <button type="submit" id="tambah" class="btn btn-primary btn-sm">Tambah</button>
@@ -132,6 +157,60 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modKurang" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{url('kurang/stok/kartu')}}">
+                        {{csrf_field()}}{{method_field('PUT')}}
+    
+                        <div class="form-group row">
+    
+                            <div class="col-md-8">
+                                <select id="kode_produk" class="form-control" required name="kode_produk">
+                                    <option value="">Pilih Ingredient</option>
+                                    @foreach ($ingredient as $item)
+                                    <option value="{{$item->id}}">{{$item->ingredient_nama}}</option>
+                                    @endforeach
+    
+                                </select>
+    
+                                @if ($errors->has('kode_produk'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('kode_produk') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="keluar" class="col-md-4 col-form-label text-md-right">Jumlah Stok Keluar</label><br>
+    
+                            <div class="col-md-8">
+                                <input id="keluar" type="number" class="form-control" name="keluar" min="0">
+    
+                                @if ($errors->has('keluar'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('keluar') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+    
+                        <div class="form-group row mb-0">
+                            <div class="col-md-12">
+                                <button type="submit" id="tambah" class="btn btn-primary btn-sm">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="modal fade" id="modTambahKiloan" role="dialog">
     <div class="modal-dialog">

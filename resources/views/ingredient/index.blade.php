@@ -303,6 +303,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                            <label for="expired_at" class="col-md-4 col-form-label ">Expired Date</label>
+    
+                            <div class="col-md-12">
+                                <input id="expired_at" type="date" class="form-control" name="expired_at" autofocus>
+    
+                                @if ($errors->has('expired_at'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('expired_at') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
                     <div class="form-group row mb-0">
                         <div class="col-md-12">
                             <button type="submit" id="tambah" class="btn btn-primary col-md-12" style="float:right;">
@@ -527,7 +541,7 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable( {
-                "paging":   true,
+                "paging":   false,
                 "ordering": false,
                 "searching": true,
                 "info":     false,

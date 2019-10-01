@@ -55,6 +55,7 @@ class IngredientController extends Controller
         $data->harga_satuan = $request->harga;
         $data->satuan_harga = $request->satuan_harga;
         $data->satuan = $request->satuan;
+        $data->expired_at = $request->expired_at;
         $data->save();
         
         $data2 = new Ingredient;
@@ -68,7 +69,7 @@ class IngredientController extends Controller
         $data2->harga_satuan = $request->harga;
         $data2->satuan_harga = $request->satuan_harga;
         $data2->satuan = $request->satuan;
-        
+        $data2->expired_at = $request->expired_at;
         $data2->save();
         
         return redirect()->route('ingredient.index')->with('message', 'Tambah data berhasil');
@@ -116,6 +117,7 @@ class IngredientController extends Controller
         $data->harga_satuan = $request->harga;
         $data->satuan_harga = $request->satuan_harga;
         $data->satuan = $request->satuan;
+        $data->expired_at = $request->expired_at;
         $data->save();
         
         $data2 = Ingredient::first()->setConnection('mysql2')->setTable('ingredient')->where('ingredient_id', $id)->where('store_id', 1)->first();
@@ -125,6 +127,7 @@ class IngredientController extends Controller
         $data2->harga_satuan = $request->harga;
         $data2->satuan_harga = $request->satuan_harga;
         $data2->satuan = $request->satuan;
+        $data2->expired_at = $request->expired_at;
         
         $data2->save();
         return redirect()->route('ingredient.index')->with('message', 'Update data berhasil');

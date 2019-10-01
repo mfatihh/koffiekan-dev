@@ -207,7 +207,7 @@ abstract class TransactionDraft
                 $stok2->setTable('stoks');
                 $stok2->store_id = 1;
                 $stok2->kode_produk = $ingredient->id;
-                $stok2->no_invoice = $this->getNewInvoiceNo();
+                $stok2->no_invoice = $stok->no_invoice;
                 $stok2->keluar = $produk_ingredient->nilai * $item->qty;
                 $stok2->sisa_stok = $ingredient->stok;
                 $stok2->harga = $produk_ingredient->harga* $item->qty;

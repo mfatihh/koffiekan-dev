@@ -58,8 +58,44 @@ class StokController extends Controller
         $stok2->save();
 
         $ing  =Ingredient::where('id', $request->kode_produk)->first();
-        $ing->stok = $ing->stok + $request->masuk;
+        if($request->expired_at == null)
+        {
+            
+            $ing->stok = $ing->stok + $request->masuk;
+        
+        }
+        else
+        {
+            $ing->stok = $request->masuk;
+            $ing->expired_at =$request->expired_at;
+        }
+        
         $ing->save();
+        return back();
+    }
+
+    public function minStok(Request $request)
+    {
+        $ing  =Ingredient::where('id', $request->kode_produk)->first();
+        $ing->stok = $ing->stok - $request->keluar;
+        $ing->save();
+
+        $stok = new Stok;
+        $stok->keluar = $request->keluar;
+        $stok->kode_produk = $request->kode_produk;
+        $stok->harga = $ing->harga_satuan * $stok->keluar / $ing->satuan_harga;
+        $stok->save();
+        
+        $stok2 = new Stok;
+        $stok2->setConnection('mysql2');
+        $stok2->setTable('stoks');
+        $stok2->store_id = 1;
+        $stok2->keluar = $request->keluar;
+        $stok2->kode_produk = $request->kode_produk;
+        $stok2->harga = $ing->harga_satuan * $stok->keluar / $ing->satuan_harga;
+        $stok2->save();
+
+        
         return back();
     }
 

@@ -12,7 +12,8 @@ class Ingredient extends Model
         'id',
         'kategory_ingredient_id',
         'ingredient_nama',
-        'satuan'
+        'satuan',
+        'expired_at'
     ];
 
     public function product()

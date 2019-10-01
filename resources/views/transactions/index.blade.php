@@ -35,7 +35,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table" id="">
+                                <table class="" id="">
                                     <thead class="text-primary">
                                         <tr>
                                             <th>No</th>

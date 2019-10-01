@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('stok/kartu', 'StokController@addStok');
     Route::post('stok/kartu/kiloan', 'StokController@addStokKiloan');
     Route::post('stok/kartu/kiloan-satuan', 'StokController@addStokKiloanSatuan');
+    Route::put('kurang/stok/kartu', 'StokController@minStok');
 
     Route::resource('customer', 'CSController', ['only' => ['index','show']]);
     Route::post('customer/tipe', 'CSController@customer');
@@ -88,6 +89,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::delete('deletekategory/{id}', 'ProductsController@deletekategory')->name('delete.kategory');
     Route::put('editkategory/{id}', 'ProductsController@editkategory')->name('edit.kategory');
     Route::delete('delete/transaction/{id}', 'TransactionsController@delete')->name('delete.transaction');
+
 
 });
     // Route::resource('users', 'UsersController', ['except' => ['create', 'show', 'edit']]);
